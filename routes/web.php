@@ -14,15 +14,18 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-    $user = Auth::user();
-    //$user = User::firstOrFail();
-    return $user;
-    if($user->isAdmin()){
-        return "this user is an admin";
-    }
-    return "Normal user";
-})->middleware('auth');
+    return view('welcome');
+});
+// Route::get('/', function () {
+//     //return view('welcome');
+//     $user = Auth::user();
+//     //$user = User::firstOrFail();
+//     return $user;
+//     if($user->isAdmin()){
+//         return "this user is an admin";
+//     }
+//     return "Normal user";
+// })->middleware('auth');
 
 
 
@@ -37,3 +40,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin/user/roles',['middleware'=>'role',function(){
     return "Middleware role";
 }]);
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth');
